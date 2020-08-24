@@ -12,7 +12,7 @@ const authRouter = require("../auth/auth-router");
 
 const sessionConfig = {
   name: "test",
-  secret: "if I tell you, I have to kill you",
+  secret: "bird is the word",
   resave: false,
   saveUninitialized: true, // needed for GDPR compliance
   cookie: {
