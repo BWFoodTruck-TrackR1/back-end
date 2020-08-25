@@ -1,54 +1,39 @@
-const express = require("express");
-const session = require("express-session");
-const CSK = require("connect-session-knex")(session);
-const cors = require("cors");
-const helmet = require("helmet");
-const knex = require("../data/db-config");
-const restricted = require("../auth/auth-middleware");
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+
+// Authenticated Middleware
+const Restricted = require('../auth/auth-Middleware')
+
+// Authenticated Routes 
+const operatorAuth = require('../auth/operator-AuthRouter.js')
+const dinerAuth = require('../auth/diner-AuthRoute')
+
+// ROUTES SOURCE
+const operatorRoute = require('./routers/operator/operator-Route');
+const dinerRouter =  require('./routers/diner/diner-Route');
+const truckRouter = require('./routers/trucks/trucks-Route')
 
 const server = express();
 
-const authRouter = require("../auth/auth-router");
-
-const sessionConfig = {
-  name: "test",
-  secret: "if I tell you, I have to kill you",
-  resave: false,
-  saveUninitialized: true, // needed for GDPR compliance
-  cookie: {
-    maxAge: 1000 * 60 * 10,
-    secure: false, // should be true in production
-    httpOnly: true, // true means JS can't touch the cookie
-  },
-  store: new CSK({
-    knex,
-    tableName: "sessions",
-    createTable: true,
-    sidFieldName: "sid",
-    clearInterval: 1000 * 60 * 15,
-  }),
-};
-
-server.use(cors());
-
-server.get("/hash", (req, res) => {
-  const authentification = req.headers.authentification;
-
-  const hash = bcrypt.hashSync(authentification, 8);
-
-  res.json({ originalValue: authentification, hashedValue: hash });
-});
-
-server.get("/", (req, res) => {
-  console.log(req.sesson);
-  res.status(200).json({ api: "up" });
-});
-
 server.use(helmet());
+server.use(cors());
 server.use(express.json());
-server.use(session(sessionConfig));
 
-server.use("/api/auth", authRouter);
+// Authenticated Login for Operators and Client(Diners)
+server.use('/auth/operator', operatorAuth);
+server.use('/auth/diner', dinerAuth);
+
+// ROUTES for Admin
+server.use('/operators', Restricted, operatorRoute);
+server.use('/diners', Restricted, dinerRouter);
+server.use('/trucks', truckRouter)
+
+server.get('/', async (req, res) => {
+    res.json({ api: 'running...' })
+})
+
 
 
 module.exports = server;
+
