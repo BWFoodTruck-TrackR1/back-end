@@ -9,6 +9,7 @@ const Restricted = require('../auth/auth-Middleware')
 const operatorAuth = require('../auth/operator-AuthRouter.js')
 const dinerAuth = require('../auth/diner-AuthRoute')
 
+
 // ROUTES SOURCE
 const operatorRoute = require('./routers/operator/operator-Route');
 const dinerRouter =  require('./routers/diner/diner-Route');
