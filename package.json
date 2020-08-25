@@ -6,8 +6,9 @@
   "scripts": {
     "test": "cross-env DB_ENV=testing jest --watch",
     "server": "nodemon index.js",
-    "start": "node index.js"
-    
+
+    "start": "node index.js",
+    "heroku-postbuild": "knex migrate:latest"
   },
   "repository": {
     "type": "git",
