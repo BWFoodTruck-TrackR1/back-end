@@ -1,7 +1,7 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('trucks').del()
+  return knex('trucks').delete()
     .then(function () {
       // Inserts seed entries
       return knex('trucks').insert([
