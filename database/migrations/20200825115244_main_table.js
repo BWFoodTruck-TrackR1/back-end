@@ -33,9 +33,7 @@ exports.up = async function(knex) {
       table.string("cuisine_type").notNullable();
       table.integer("customer_ratings_avg");
       table.string('current_location');
-      table.string("open_time").notNullable();
-      
-      
+      table.string("open_time").notNullable()
       
     });
   
