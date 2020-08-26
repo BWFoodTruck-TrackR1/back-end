@@ -26,7 +26,8 @@ exports.up = async function(knex) {
         .integer("operator_id")
         .references("id")
         .inTable("operators")
-        .onDelete("SET NULL");
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE")
       table.string("name").notNullable();
       table.string("image_URL");
       table.string("cuisine_type").notNullable();
