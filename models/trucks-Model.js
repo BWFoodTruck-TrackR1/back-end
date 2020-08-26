@@ -11,9 +11,6 @@ const findAll = () => {
     .select('*')
 }
 
-
-
-
 const findByLocation = (truckId) => {
     return db('current_location as cl')
     .select('cl.id', 'cl.lon', 'cl.lat', 'cl.departure_time')
