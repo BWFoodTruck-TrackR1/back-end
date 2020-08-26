@@ -1,8 +1,8 @@
 const db = require('../database/dbConfig');
 
-const add = (trucks) => {
+const add = (truck) => {
     return db('trucks')
-    .insert(trucks, 'id')
+    .insert(truck, 'id')
     .then(([id]) => db('trucks').where({ id }).first());
 }
 
