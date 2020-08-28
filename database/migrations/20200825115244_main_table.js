@@ -16,7 +16,6 @@ exports.up = async function(knex) {
       table.string("password").notNullable();
       table.string("location");
   
-  
     });
   
     // #### TRUCKS TABLE ####
@@ -34,9 +33,7 @@ exports.up = async function(knex) {
       table.integer("customer_ratings_avg");
       table.string("current_location");
       table.string("open_time").notNullable();
-      
-      
-      
+        
     });
   
     // #### TRUCK RATINGS FROM DINER ####
