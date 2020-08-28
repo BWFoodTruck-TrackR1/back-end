@@ -28,7 +28,7 @@ server.use('/auth/diner', dinerAuth);
 // ROUTES for Admin
 server.use('/operators', Restricted, operatorRoute);
 server.use('/diners', Restricted, dinerRouter);
-server.use('/trucks', truckRouter)
+server.use('/trucks', Restricted, truckRouter)
 
 server.get('/', async (req, res) => {
     res.json({ api: 'running...' })
